@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\BackEndMinApi.csproj": {}
+    "c:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\BackEndMinApi.csproj": {}
   },
   "projects": {
-    "C:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\BackEndMinApi.csproj": {
+    "c:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\BackEndMinApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\BackEndMinApi.csproj",
+        "projectUniqueName": "c:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\BackEndMinApi.csproj",
         "projectName": "BackEndMinApi",
-        "projectPath": "C:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\BackEndMinApi.csproj",
+        "projectPath": "c:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\BackEndMinApi.csproj",
         "packagesPath": "C:\\Users\\Sutanto\\.nuget\\packages\\",
-        "outputPath": "C:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\obj\\",
+        "outputPath": "c:\\data software 2022\\LatihanNextJsJuni2024\\latihannextjsjuni2024\\BackEndMinApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -51,9 +51,57 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.35, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.3.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.6, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.6.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

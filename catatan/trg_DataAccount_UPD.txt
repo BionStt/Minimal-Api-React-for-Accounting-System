@@ -1,0 +1,49 @@
+﻿CREATE TRIGGER [dbo].[trg_DataAccount_UPD]
+	ON [dbo].[DataAccount]
+	INSTEAD OF UPDATE
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	--Don't allow updates to structural fields (Position, Depth) nor parent; really, you can only update Name.
+	IF (EXISTS (SELECT 1
+		FROM Deleted
+		JOIN Inserted
+			ON Inserted.NoUrutId = Deleted.NoUrutId
+		WHERE Deleted.Parent <> Inserted.Parent
+			OR Deleted.Lft <> Inserted.Lft
+			OR Deleted.Rgt <> Inserted.Rgt
+			OR Deleted.Depth <> Inserted.Depth
+		))
+	BEGIN
+		RAISERROR (N'Cannot update position/parent values inline; use the dedicated stored-procedure to move nodes.', 18, 1)
+		RETURN
+	END
+
+	--Don't allow updates to NULL values
+	IF (EXISTS (SELECT 1
+		FROM Deleted
+		JOIN Inserted
+			ON Inserted.NoUrutId = Deleted.NoUrutId
+		WHERE Inserted.Parent IS NULL
+			OR Inserted.Lft IS NULL
+			OR Inserted.Rgt IS NULL
+			OR Inserted.Depth IS NULL
+		))
+	BEGIN
+		RAISERROR (N'Cannot update values to NULL; use the dedicated stored-procedure to set a node to "root" (NULL parent).', 18, 1)
+		RETURN
+	END
+
+	--Else, proceed with update -- you can only update the Name!
+	UPDATE DataAccount SET DataAccount.Account = Inserted.Account
+	FROM DataAccount
+	JOIN Inserted
+		ON Inserted.NoUrutId = DataAccount.NoUrutId
+END
+GO
+
+ALTER TABLE [dbo].[DataAccount] ENABLE TRIGGER [trg_DataAccount_UPD]
+GO
+
+

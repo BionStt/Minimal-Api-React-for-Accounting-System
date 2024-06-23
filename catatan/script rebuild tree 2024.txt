@@ -1,0 +1,79 @@
+
+-- Disable triggers
+ALTER TABLE DataAccount DISABLE TRIGGER trg_DataAccount_INS;
+ALTER TABLE DataAccount DISABLE TRIGGER trg_DataAccount_UPD;
+GO
+
+-- Create the recursive procedure
+ALTER PROCEDURE RebuildTreeRecursive
+    @ParentID INT = NULL,
+    @Position INT OUTPUT,
+    @Depth INT
+AS
+BEGIN
+    DECLARE @CurrentID INT;
+    DECLARE @Left INT;
+    DECLARE @Right INT;
+    DECLARE @ChildPosition INT;
+    DECLARE @NewDepth INT;
+
+    -- Declare cursor
+    DECLARE cur CURSOR LOCAL FORWARD_ONLY READ_ONLY FOR
+        SELECT NoUrutId
+        FROM DataAccount
+        WHERE (Parent IS NULL AND @ParentID IS NULL) OR (Parent = @ParentID)
+        ORDER BY NoUrutId;
+
+    OPEN cur;
+
+    FETCH NEXT FROM cur INTO @CurrentID;
+    
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        SET @Left = @Position;
+        SET @Position = @Position + 1;
+
+        -- Set new depth value
+        SET @NewDepth = @Depth + 1;
+        SET @ChildPosition = @Position;
+
+        -- Call the procedure recursively to handle children
+        EXEC RebuildTreeRecursive @ParentID = @CurrentID, @Position = @ChildPosition OUTPUT, @Depth = @NewDepth;
+
+        SET @Position = @ChildPosition;
+        SET @Right = @Position + 1;
+        SET @Position = @Right;
+
+        -- Update the current node with calculated values
+        UPDATE DataAccount
+        SET Lft = @Left, Rgt = @Right, Depth = @Depth
+        WHERE NoUrutId = @CurrentID;
+
+        FETCH NEXT FROM cur INTO @CurrentID;
+    END;
+
+    CLOSE cur;
+    DEALLOCATE cur;
+END;
+GO
+
+-- Create the main procedure
+ALTER PROCEDURE RebuildDataAccountTree
+AS
+BEGIN
+    DECLARE @Position INT;
+    SET @Position = 1;
+
+    EXEC RebuildTreeRecursive @ParentID = NULL, @Position = @Position OUTPUT, @Depth = 0;
+END;
+GO
+
+-- Execute the procedure to rebuild the tree
+EXEC RebuildDataAccountTree;
+GO
+
+
+-- Re-enable triggers
+ALTER TABLE DataAccount ENABLE TRIGGER trg_DataAccount_INS;
+ALTER TABLE DataAccount ENABLE TRIGGER trg_DataAccount_UPD;
+GO
