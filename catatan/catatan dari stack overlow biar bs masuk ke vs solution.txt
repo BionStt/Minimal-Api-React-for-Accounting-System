@@ -1,0 +1,50 @@
+I can import the ReactJS App from other place and then use VS2022 to run the App. Also include debug.
+
+Below is the steps I do on my side:
+
+1, Put these two files under the root directory of the project:
+
+reactproject1.esproj
+
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.26-alpha">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>a9857706-c039-4a3c-8997-3f5756ae92a3</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupCommand>set BROWSER=none&amp;&amp;npm start</StartupCommand>
+    <JavaScriptTestRoot>src\</JavaScriptTestRoot>
+    <JavaScriptTestFramework>Jest</JavaScriptTestFramework>
+  </PropertyGroup>
+</Project>
+reactproject1.esproj.user
+
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+</Project>
+After that, your react app will be able to run in VS2022, but still unable to debug.
+
+If you need debug, you need to add a folder named '.vscode' under the root directory. After that, create a file named 'launch.json', this file is the configuration file for debug react app:
+
+launch.json
+
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "localhost (Chrome)",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "edge",
+      "request": "launch",
+      "name": "localhost (Edge)",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
+This is the structure of the react app on my side:

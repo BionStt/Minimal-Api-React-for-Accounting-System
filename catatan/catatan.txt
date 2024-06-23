@@ -1,0 +1,62 @@
+npx create-next-app@latest projectlatihan
+
+cd projectlatihan
+
+npm install --save-dev eslint prettier
+
+npm run dev
+
+cd src
+dalam nextjs 14 . semua page.jsx diusahakan dlm folder app. bs jg dibuatkan folder. component dan library diluar app.
+
+
+buat folder
+
+mkdir utils => utk naruh file terkait endpoint
+
+mkdir components => utk kumpulan component
+
+mkdir lib = > disini semua file yg narik dari api server kemudian balikin data dlm bentuk json. 
+
+
+cd app 
+kemudian buat folder utk masing2 page contoh login
+mkdir login
+echo . > layout.js => buat filenya ini untuk layout atau sharing view pages
+
+echo . > page.jsx  or  echo . > page.tsx => untuk halaman utama
+
+
+cd..
+cd..
+npm install local-storage@latest => install di latihannextmei2024
+
+npm install @microsoft/signalr axios
+
+npm install @material/list @material/menu @material/menu-surface @material/react-material-icon @material/react-notched-outline @material/react-select @material/react-switch @material/react-text-field @material/textfield 
+
+npm install cryptr currency-formatter d3-interpolate-path d3-shape date-fns dot-object express express-static-gzip flexibility flubber fuse.js http-proxy-middleware immutability-helper intl local-storage lodash lottie-web next next-cookies next-remove-imports nookies number-format.js randomcolor react-custom-scroll react-dom react-resize-detector react-spring styled-components
+
+npm install @types/cryptr @types/d3-shape @types/lodash @types/node @types/react @types/react-dom babel-plugin-styled-components compression-webpack-plugin cross-env micro string-replace-loader style-loader webpack sass-loader
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

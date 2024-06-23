@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.1088444">
+  <!-- Global properties for the project -->
+  <PropertyGroup Label="Globals">
+    <!-- Unique identifier for the project -->
+    <ProjectGuid>a9857706-c039-4a3c-8997-3f5756ae92a3</ProjectGuid>
+  </PropertyGroup>
+
+  
+  <!-- Properties specific to the JavaScript project -->
+  <PropertyGroup>
+    <!-- Command to start the application, disabling auto-opening in a browser -->
+     <StartupCommand>set BROWSER=none&amp;&amp;npm start</StartupCommand> 
+     <!--<StartupCommand>cross-env BROWSER=none npm start</StartupCommand>-->
+    <!-- Root directory for JavaScript tests -->
+    <JavaScriptTestRoot>src\</JavaScriptTestRoot>
+    <!-- JavaScript testing framework being used -->
+    <JavaScriptTestFramework>Jest</JavaScriptTestFramework>
+  </PropertyGroup>
+</Project>
